@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Gusanos Online 🐛</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ===================== LOBBY ===================== -->
+<div id="lobby" class="screen">
+  <div class="lobby-card">
+    <h1 class="logo">GUSANOS <span>ONLINE</span></h1>
+    <p class="tagline">Artillería por turnos · hasta 4 jugadores online</p>
+
+    <div class="form-row">
+      <label>Tu nombre
+        <input id="nameInput" maxlength="14" placeholder="Daniel" />
+      </label>
+      <label>Sala
+        <input id="roomInput" maxlength="20" placeholder="sala1" />
+      </label>
+    </div>
+
+    <p class="pick-label">Elige tu gusano</p>
+    <div class="char-grid">
+      <button class="char" data-char="antonio">
+        <canvas width="120" height="120"></canvas>
+        <span class="char-name">Antonio</span>
+        <span class="char-desc">El calvo</span>
+      </button>
+      <button class="char" data-char="kun">
+        <canvas width="120" height="120"></canvas>
+        <span class="char-name">Kun</span>
+        <span class="char-desc">El de las gafas</span>
+      </button>
+      <button class="char" data-char="dani">
+        <canvas width="120" height="120"></canvas>
+        <span class="char-name">Dani</span>
+        <span class="char-desc">El barbudo</span>
+      </button>
+      <button class="char" data-char="vinny">
+        <canvas width="120" height="120"></canvas>
+        <span class="char-name">Vinny</span>
+        <span class="char-desc">El lentorro</span>
+      </button>
+    </div>
+
+    <button id="joinBtn" class="btn-primary">Entrar a la sala</button>
+
+    <div id="lobbyWait" class="hidden">
+      <h2 class="room-title">Sala: <span id="roomName"></span></h2>
+      <ul id="playerList" class="player-list"></ul>
+      <p class="hint">Comparte el nombre de la sala con tus colegas para que entren.</p>
+      <button id="startBtn" class="btn-primary hidden">¡Empezar partida!</button>
+      <p id="hostHint" class="hint hidden">Esperando a que el anfitrión empiece…</p>
+    </div>
+
+    <p id="errorMsg" class="error"></p>
+  </div>
+</div>
+
+<!-- ===================== JUEGO ===================== -->
+<div id="game" class="screen hidden">
+  <div class="hud">
+    <div class="hud-left">
+      <span id="turnLabel">—</span>
+    </div>
+    <div class="hud-center">
+      <span class="wind-label">VIENTO</span>
+      <div id="windBar"><div id="windFill"></div></div>
+      <span id="windVal">0.0</span>
+    </div>
+    <div class="hud-right">
+      <span id="timer">30</span><span class="timer-unit">s</span>
+    </div>
+  </div>
+  <div id="canvasWrap">
+    <canvas id="board"></canvas>
+    <div id="powerWrap" class="hidden">
+      <div id="powerBar"><div id="powerFill"></div></div>
+      <span class="power-label">POTENCIA</span>
+    </div>
+  </div>
+  <div class="controls-hint">
+    <b>A/D</b> o <b>← →</b> mover · <b>W</b> saltar · <b>ratón</b> apuntar ·
+    <b>mantén ESPACIO</b> para cargar y <b>suelta</b> para disparar
+  </div>
+
+  <div id="overlay" class="overlay hidden">
+    <div class="overlay-card">
+      <h2 id="overlayTitle">Fin</h2>
+      <p id="overlaySub"></p>
+      <button id="againBtn" class="btn-primary">Volver al lobby</button>
+    </div>
+  </div>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="game.js"></script>
+</body>
+</html>
